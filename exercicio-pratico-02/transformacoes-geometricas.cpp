@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <tuple>
 #include <cmath>
 
 #include <GL/glew.h>
