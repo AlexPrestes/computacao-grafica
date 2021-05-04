@@ -18,6 +18,8 @@ struct build {
     std::vector<GLfloat> color;
 };
 
+// classe de matriz
+// usei um código que fiz na disciplina de programa para alto desempenho
 class Matrix {
     std::vector<float> _storage;
     size_t _nrows, _ncols;
@@ -56,6 +58,8 @@ public:
     };
 };
 
+// Classe Poligonos
+// classe que abstai qualquer desenho/objeto/poligono
 class Polygon {
     std::vector<vertex> _vertices;
     std::vector<vertex> _vref;
@@ -65,6 +69,7 @@ public:
     Polygon(const GLint program){
         _program = program;
         };
+    // loadBuffer: recarrega o buffer para cada objeto 
     void loadBuffer(){
         GLuint buffer;
         glGenBuffers(1, &buffer);
@@ -82,24 +87,34 @@ public:
         GLint loc_color = glGetUniformLocation(_program, "color");
         glUniform4f(loc_color, _build.color[0], _build.color[1], _build.color[2], _build.color[3]);
     };
+    
+    // inseri um novo vertice ao objeto
     void insertVertex(vertex vertice){
         _vertices.push_back(vertice);
         _vref.push_back(vertice);
     };
+    
+    // define as configurações de renderizaçao dos vertices
     void setBuild(build construcao){
         _build = construcao;
     };
+    
+    // renderiza os vertices
     void draw(){
         loadBuffer();
         glDrawArrays(_build.mode, _build.first, _build.count);
     };
+    
+    // define a cor
     void setColor(std::vector<GLfloat> _color){
         _build.color = _color;
     };
+    
+    // metodo de translação do poligonos
     void translate(std::vector<float> offset){
         Matrix translacao(3,3);
         Matrix v(3,1);
-
+        // define a matriz de translacao apartir do offset
         translacao.setValue({ 1, 0, offset[0],
                               0, 1, offset[1],
                               0, 0, 1 });
@@ -111,6 +126,8 @@ public:
             _vertices[i].y = v(1,0);
         };
     };
+    
+    // metodo de rotação por referencia
     void rotate(float theta){
         Matrix translacao1(3,3);
         Matrix rotacao(3,3);
@@ -134,7 +151,7 @@ public:
             v.setValue({_vertices[i].x, _vertices[i].y, 1});
 
             v = rotacao*translacao1*v;
-
+            // aqui foi necessario redefinir a referencia antes de desfazer a translacao
             _vref[i].x = v(0,0);
             _vref[i].y = v(1,0);
 
@@ -144,6 +161,8 @@ public:
             _vertices[i].y = v(1,0);
         };
     };
+    
+    // metodo de escala por referencia
     void scale(std::vector<float> coefficient){
         Matrix translacao1(3,3);
         Matrix escala(3,3);
@@ -167,7 +186,7 @@ public:
             v.setValue({_vertices[i].x, _vertices[i].y, 1});
 
             v = escala*translacao1*v;
-
+            // foi necessario redefinir a referencia antes de finalizar a translação
             _vref[i].x = v(0,0);
             _vref[i].y = v(1,0);
 
@@ -179,6 +198,7 @@ public:
     };
 };
 
+// classe triangulo: popula os vertices de um triangulo equilatero
 class Triangle : public Polygon {
 
 public:
@@ -191,6 +211,7 @@ public:
     };
 };
 
+// classe retangulo: popula os vertices de um retangulo ou quadrado
 class Rectangle : public Polygon {
 
 public:
@@ -203,6 +224,7 @@ public:
     };
 };
 
+// classe circulo: popula os vertices de um circulo
 class Circle : public Polygon {
 
 public:
@@ -333,10 +355,13 @@ int main(){
     novo_obj.insertVertex({-0.5, 0.2 });
     novo_obj.setBuild({GL_TRIANGLE_STRIP, 0, 7, {0.6, 0.4, 0.7, 1.0}});
 
+    // Vetor de poligonos que serão renderizados
     std::vector<Polygon> objetos = {circulo, quadrado, triangulo, novo_obj};
+    // indice do poligono selecionado
     int idx_obj = 0;
+    // ponteiro para o poligono selecionado
     Polygon *obj_select = &objetos[idx_obj];
-
+    // buffer para controle de teclas
     std::vector<bool> key_buffer(100);
 
     // Exibindo nossa janela
@@ -344,12 +369,13 @@ int main(){
 
     while (!glfwWindowShouldClose(window)){
         glfwPollEvents();
-
+        // Evento para fechar a janela pressionando ESC
         if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
             glfwSetWindowShouldClose(window, GLFW_TRUE);
         }
 
-
+        // Evento para selecionar o poligono
+        // Pressione E para avançar ou Q para retornar pelo vetor de poligonos
         if(glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS && key_buffer[GLFW_KEY_E] == false){
             key_buffer[GLFW_KEY_E] = true;
             idx_obj++;
@@ -369,7 +395,7 @@ int main(){
             key_buffer[GLFW_KEY_Q] = false;
         }
 
-
+        // Evento das teclas de translação
         if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
             obj_select->translate({0.0, 0.01});
         }
@@ -383,7 +409,7 @@ int main(){
             obj_select->translate({-0.01, 0.0});
         }
 
-
+        // Evento das teclas de rotação
         if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS){
             obj_select->rotate(-M_PI/24);
         }
@@ -391,7 +417,7 @@ int main(){
             obj_select->rotate( M_PI/24);
         }
 
-
+        // Evento das teclas de escala
         if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
             obj_select->scale({1.1, 1.1});
         }
@@ -402,6 +428,7 @@ int main(){
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(1.0, 1.0, 1.0, 1.0);
 
+        // Loop que renderiza os poligonos
         for(auto obj : objetos){
             obj.draw();
         }
