@@ -96,4 +96,16 @@ public:
     Pyramid(float );
 };
 
+// classe pyramid: popula os vertices de um piramide
+class Sphere : public Object {
+public:
+    Sphere(float );
+};
+
+// classe pyramid: popula os vertices de um piramide
+class Cylinder : public Object {
+public:
+    Cylinder(float , float);
+};
+
 #endif

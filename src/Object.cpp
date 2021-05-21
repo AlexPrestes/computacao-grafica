@@ -279,3 +279,160 @@ Pyramid::Pyramid(float L) : Object(){
     this->insertVertex(pyramid.getVertex());
     this->insertBuild(pyramid.getBuild());
 }
+
+
+
+// classe Sphere: popula os vertices de um esfera
+Sphere::Sphere(float r) : Object(){
+    int num_sectors = 30;
+    int num_stacks = 30;
+
+    float sector_step = 2*M_PI/num_sectors;
+    float stack_step = M_PI/num_stacks;
+
+    int num_vertices = num_sectors*num_stacks*6;
+    
+    int counter = 0;
+    for(int i = 0; i < num_sectors; i++){
+        for(int j = 0; j < num_stacks; j++){
+            float u =  i*sector_step;
+            float v = j*stack_step;
+
+            float un = 0;
+            if(i+1 == num_sectors){
+                un = 2*M_PI;
+            }else{
+                un = (i+1)*sector_step;
+            }
+
+            float vn = 0;
+            if(j+1 == num_stacks){
+                vn = M_PI;
+            }else{
+                vn = (j+1)*stack_step;
+            }
+            float p0_x = r*sin(v)*cos(u);
+            float p0_y = r*sin(v)*sin(u);
+            float p0_z = r*cos(v);
+
+            float p1_x = r*sin(vn)*cos(u);
+            float p1_y = r*sin(vn)*sin(u);
+            float p1_z = r*cos(vn);
+
+            float p2_x = r*sin(v)*cos(un);
+            float p2_y = r*sin(v)*sin(un);
+            float p2_z = r*cos(v);
+
+            float p3_x = r*sin(vn)*cos(un);
+            float p3_y = r*sin(vn)*sin(un);
+            float p3_z = r*cos(vn);
+
+            // adicionando triangulo 1 (primeira parte do poligono)
+            this->insertVertex({p0_x, p0_y, p0_z});
+            this->insertVertex({p2_x, p2_y, p2_z});
+            this->insertVertex({p1_x, p1_y, p1_z});
+
+            // adicionando triangulo 2 (segunda e ultima parte do poligono)
+            this->insertVertex({p3_x, p3_y, p3_z});
+            this->insertVertex({p1_x, p1_y, p1_z});
+            this->insertVertex({p2_x, p2_y, p2_z});
+        }
+    }
+
+    int increment = num_vertices/3;
+
+    for(int triangle=0; triangle < num_vertices; triangle+=increment){
+        
+        srand(triangle); // definir mesma semente aleatoria para cada triangulo
+        float R = (float)rand()/(float)RAND_MAX;
+        float G = (float)rand()/(float)RAND_MAX;
+        float B = (float)rand()/(float)RAND_MAX;
+
+        this->insertBuild({GL_TRIANGLES, triangle, increment, {R, G, B, 1.0}});
+    }
+}
+
+
+
+// classe Sphere: popula os vertices de um esfera
+Cylinder::Cylinder(float r, float h) : Object(){
+    int num_sectors = 30;
+
+    float sector_step = 2*M_PI/num_sectors;
+
+    int num_vertices = num_sectors*6;
+    
+    int counter = 0;
+    for(int i = 0; i < num_sectors; i++){
+        float t =  i*sector_step;
+
+        float tn = 0;
+        if(i+1 == num_sectors){
+            tn = 2*M_PI;
+        }else{
+            tn = (i+1)*sector_step;
+        }
+
+        float p0_x = r*cos(t);
+        float p0_y = r*sin(t);
+        float p0_z = h/2;
+
+        float p1_x = r*cos(t);
+        float p1_y = r*sin(t);
+        float p1_z = -h/2;
+
+        float p2_x = r*cos(tn);
+        float p2_y = r*sin(tn);
+        float p2_z = h/2;
+
+        float p3_x = r*cos(tn);
+        float p3_y = r*sin(tn);
+        float p3_z = -h/2;
+
+        // adicionando triangulo 1 (primeira parte do poligono)
+        this->insertVertex({p0_x, p0_y, p0_z});
+        this->insertVertex({p2_x, p2_y, p2_z});
+        this->insertVertex({p1_x, p1_y, p1_z});
+
+        // adicionando triangulo 2 (segunda e ultima parte do poligono)
+        this->insertVertex({p3_x, p3_y, p3_z});
+        this->insertVertex({p1_x, p1_y, p1_z});
+        this->insertVertex({p2_x, p2_y, p2_z});
+    }
+
+    int increment = num_vertices/3;
+
+    for(int triangle=0; triangle < num_vertices; triangle+=increment){
+        
+        srand(triangle); // definir mesma semente aleatoria para cada triangulo
+        float R = (float)rand()/(float)RAND_MAX;
+        float G = (float)rand()/(float)RAND_MAX;
+        float B = (float)rand()/(float)RAND_MAX;
+
+        this->insertBuild({GL_TRIANGLES, triangle, increment, {R, G, B, 1.0}});
+    }
+
+    // inserindo as tampas do cilindro
+    num_vertices = num_sectors;
+    int first = this->getVertex().size();
+    float angle = 0.0;
+    float x, y;
+    for(int i=0; i < num_vertices; i++){
+	    angle += (2.0*M_PI)/num_vertices;
+	    x = cos(angle)*r;
+	    y = sin(angle)*r;
+	    this->insertVertex({x, y, h/2});
+    }
+    this->insertBuild(Build({GL_TRIANGLE_FAN, first, num_vertices, {0.2, 0.3, 0.0, 1.0}}));
+
+    // inserindo as tampas do cilindro
+    first = this->getVertex().size();
+    angle = 0.0;
+    for(int i=0; i < num_vertices; i++){
+	    angle += (2.0*M_PI)/num_vertices;
+	    x = cos(angle)*r;
+	    y = sin(angle)*r;
+	    this->insertVertex({x, y,-h/2});
+    }
+    this->insertBuild(Build({GL_TRIANGLE_FAN, first, num_vertices, {0.5, 0.3, 0.0, 1.0}}));
+}

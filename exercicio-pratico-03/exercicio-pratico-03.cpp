@@ -161,17 +161,17 @@ int main(){
     glUseProgram(program);
  
     // Adicionando Cubo
-    Cube cubo(0.4);
-    cubo.translate({0.3, 0.0, 0.0});
+    Cylinder cilindro(0.2, 0.4);
+    cilindro.translate({0.3, 0.0, 0.0});
 
     // Adicionando Piramide
-    Pyramid piramide(0.4);
+    Pyramid piramide(0.3);
     piramide.translate({-0.3, 0.0, 0.0});
 
     // Vetor de poligonos que serão renderizados
     Scene cena(program);
     cena.insertObject(piramide);
-    cena.insertObject(cubo);
+    cena.insertObject(cilindro);
 
     // Exibindo nossa janela
     glfwShowWindow(window);
