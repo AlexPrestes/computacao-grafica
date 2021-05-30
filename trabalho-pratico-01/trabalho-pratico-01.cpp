@@ -85,6 +85,127 @@ public:
     }
 };
 
+class Seringa : public Object {
+public:
+    Seringa(){
+    this->insertVertex({-0.1,-0.01, 0.0});
+    this->insertVertex({-0.1, 0.01, 0.0});
+    this->insertVertex({ 0.1,-0.01, 0.0});
+    this->insertVertex({ 0.1, 0.01, 0.0});
+
+    this->insertVertex({-0.1 ,-0.01, 0.0});
+    this->insertVertex({-0.08,-0.01, 0.0});
+    this->insertVertex({-0.1 , 0.8 , 0.0});
+    this->insertVertex({-0.08, 0.8 , 0.0});
+
+    this->insertVertex({0.1 ,-0.01, 0.0});
+    this->insertVertex({0.08,-0.01, 0.0});
+    this->insertVertex({0.1 , 0.8 , 0.0});
+    this->insertVertex({0.08, 0.8 , 0.0});
+                    
+    this->insertVertex({-0.2, 0.8 , 0.0});
+    this->insertVertex({-0.2, 0.78, 0.0});
+    this->insertVertex({ 0.2, 0.8 , 0.0});
+    this->insertVertex({ 0.2, 0.78, 0.0});
+                    
+    this->insertVertex({-0.08, -0.01, 0.0});
+    this->insertVertex({-0.08, 0.49, 0.0});
+    this->insertVertex({0.08, -0.01, 0.0});
+    this->insertVertex({0.08, 0.49, 0.0});
+                    
+    this->insertVertex({-0.05, -0.005, 0.0});
+    this->insertVertex({ -0.05, -0.055, 0.0});
+    this->insertVertex({0.05, -0.005, 0.0});
+    this->insertVertex({0.05, -0.055, 0.0});
+
+    this->insertVertex({-0.005, -0.005, 0.0});
+    this->insertVertex({-0.005, -0.705, 0.0});
+    this->insertVertex({0.005, -0.005, 0.0});
+    this->insertVertex({0.005, -0.705, 0.0});
+                    
+    this->insertVertex({-0.08, 0.49, 0.0});
+    this->insertVertex({-0.08, 0.51, 0.0});
+    this->insertVertex({0.1, 0.49, 0.0});
+    this->insertVertex({0.1, 0.51, 0.0});
+
+    this->insertVertex({-0.03, 0.5, 0.0});
+    this->insertVertex({-0.03, 0.98, 0.0});
+    this->insertVertex({0.03, 0.5, 0.0});
+    this->insertVertex({0.03, 0.98, 0.0});
+                    
+    this->insertVertex({-0.1, 0.97, 0.0});
+    this->insertVertex({-0.1, 0.99, 0.0});
+    this->insertVertex({0.1, 0.97, 0.0});
+    this->insertVertex({0.1, 0.99, 0.0});
+
+    this->insertBuild({GL_TRIANGLE_STRIP, 0, 4, {0.5, 0.6, 1.0, 1.0}});
+    this->insertBuild({GL_TRIANGLE_STRIP, 4, 4, {0.5, 0.6, 1.0, 1.0}});
+    this->insertBuild({GL_TRIANGLE_STRIP, 8, 4, {0.5, 0.6, 1.0, 1.0}});
+    this->insertBuild({GL_TRIANGLE_STRIP, 12, 4, {0.5, 0.6, 1.0, 1.0}});
+
+    this->insertBuild({GL_TRIANGLE_STRIP, 16, 4, {0.5, 1.0, 0.8, 1.0}});
+
+    this->insertBuild({GL_TRIANGLE_STRIP, 20, 4, {0.5, 0.6, 1.0, 1.0}});
+    this->insertBuild({GL_TRIANGLE_STRIP, 24, 4, {0.5, 0.6, 1.0, 1.0}});
+
+    this->insertBuild({GL_TRIANGLE_STRIP, 28, 4, {0.5, 0.6, 1.0, 1.0}});
+    this->insertBuild({GL_TRIANGLE_STRIP, 32, 4, {0.5, 0.6, 1.0, 1.0}});
+    this->insertBuild({GL_TRIANGLE_STRIP, 36, 4, {0.5, 0.6, 1.0, 1.0}});
+    }
+};
+
+class Frasco : public Object {
+public:
+    Frasco(){
+    this->insertVertex({-0.1, -0.01, 0.0});
+    this->insertVertex({-0.1, 0.04, 0.0});
+    this->insertVertex({0.1, -0.01, 0.0});
+    this->insertVertex({0.1, 0.04, 0.0});
+                    
+    this->insertVertex({-0.1, -0.01, 0.0});
+    this->insertVertex({-0.1, 0.48, 0.0});
+    this->insertVertex({-0.08, -0.01, 0.0});
+    this->insertVertex({-0.08, 0.48, 0.0});
+
+    this->insertVertex({0.1, -0.01, 0.0});
+    this->insertVertex({0.1, 0.48, 0.0});
+    this->insertVertex({0.08, -0.01, 0.0});
+    this->insertVertex({0.08, 0.48, 0.0});
+                    
+    this->insertVertex({-0.1, 0.5, 0.0});
+    this->insertVertex({-0.1, 0.45, 0.0});
+    this->insertVertex({0.1, 0.5, 0.0});
+    this->insertVertex({0.1, 0.45, 0.0});
+                    
+    this->insertVertex({-0.1, -0.01, 0.0});
+    this->insertVertex({-0.1, 0.39, 0.0});
+    this->insertVertex({0.1, -0.01, 0.0});
+    this->insertVertex({0.1, 0.39, 0.0});
+                    
+    this->insertVertex({-0.08, 0.5, 0.0});
+    this->insertVertex({-0.08, 0.55, 0.0});
+    this->insertVertex({0.08, 0.5, 0.0});
+    this->insertVertex({ 0.08, 0.55, 0.0});
+                    
+    this->insertVertex({-0.1, 0.55, 0.0});
+    this->insertVertex({-0.1, 0.75, 0.0});
+    this->insertVertex({0.1, 0.55, 0.0});
+    this->insertVertex({0.1, 0.75, 0.0});
+
+    this->insertBuild({GL_TRIANGLE_STRIP, 0, 4, {0.5, 0.6, 1.0, 1.0}});
+    this->insertBuild({GL_TRIANGLE_STRIP, 4, 4, {0.5, 0.6, 1.0, 1.0}});
+    this->insertBuild({GL_TRIANGLE_STRIP, 8, 4, {0.5, 0.6, 1.0, 1.0}});
+    this->insertBuild({GL_TRIANGLE_STRIP, 12, 4, {0.5, 0.6, 1.0, 1.0}});
+
+    this->insertBuild({GL_TRIANGLE_STRIP, 16, 4, {0.5, 1.0, 0.8, 1.0}});
+
+    this->insertBuild({GL_TRIANGLE_STRIP, 20, 4, {0.5, 0.6, 1.0, 1.0}});
+
+    this->insertBuild({GL_TRIANGLE_STRIP, 24, 4, {0.7, 0.9, 1.0, 1.0}});
+
+    }
+};
+
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if(key == GLFW_KEY_ESCAPE){
@@ -244,15 +365,24 @@ int main(){
     // Adicionando Coronga
     Coronga coronga;
     coronga.translate({-0.3, 0.0, 0.0});
+    coronga.scale({-0.8, -0.8, 0.0});
 
     // Adicionando Humano
     Humano humano;
-    humano.translate({0.3, 0.0, 0.0});
+    humano.translate({0.3, 0.3, 0.0});
+
+    Seringa seringa;
+    seringa.translate({0.3, -0.3, 0.0});
+
+    Frasco frasco;
+    frasco.translate({0.3, -0.3, 0.0});
 
     // Vetor de poligonos que serão renderizados
     Scene cena(program);
     cena.insertObject(coronga);
     cena.insertObject(humano);
+    cena.insertObject(seringa);
+    cena.insertObject(frasco);
 
     // Exibindo nossa janela
     glfwShowWindow(window);
