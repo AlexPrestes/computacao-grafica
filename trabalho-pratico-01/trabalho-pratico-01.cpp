@@ -138,12 +138,13 @@ public:
     this->insertVertex({0.1, 0.97, 0.0});
     this->insertVertex({0.1, 0.99, 0.0});
 
+
+    this->insertBuild({GL_TRIANGLE_STRIP, 16, 4, {0.5, 1.0, 0.8, 1.0}});
+
     this->insertBuild({GL_TRIANGLE_STRIP, 0, 4, {0.5, 0.6, 1.0, 1.0}});
     this->insertBuild({GL_TRIANGLE_STRIP, 4, 4, {0.5, 0.6, 1.0, 1.0}});
     this->insertBuild({GL_TRIANGLE_STRIP, 8, 4, {0.5, 0.6, 1.0, 1.0}});
     this->insertBuild({GL_TRIANGLE_STRIP, 12, 4, {0.5, 0.6, 1.0, 1.0}});
-
-    this->insertBuild({GL_TRIANGLE_STRIP, 16, 4, {0.5, 1.0, 0.8, 1.0}});
 
     this->insertBuild({GL_TRIANGLE_STRIP, 20, 4, {0.5, 0.6, 1.0, 1.0}});
     this->insertBuild({GL_TRIANGLE_STRIP, 24, 4, {0.5, 0.6, 1.0, 1.0}});
@@ -192,12 +193,12 @@ public:
     this->insertVertex({0.1, 0.55, 0.0});
     this->insertVertex({0.1, 0.75, 0.0});
 
+    this->insertBuild({GL_TRIANGLE_STRIP, 16, 4, {0.5, 1.0, 0.8, 1.0}});
+
     this->insertBuild({GL_TRIANGLE_STRIP, 0, 4, {0.5, 0.6, 1.0, 1.0}});
     this->insertBuild({GL_TRIANGLE_STRIP, 4, 4, {0.5, 0.6, 1.0, 1.0}});
     this->insertBuild({GL_TRIANGLE_STRIP, 8, 4, {0.5, 0.6, 1.0, 1.0}});
     this->insertBuild({GL_TRIANGLE_STRIP, 12, 4, {0.5, 0.6, 1.0, 1.0}});
-
-    this->insertBuild({GL_TRIANGLE_STRIP, 16, 4, {0.5, 1.0, 0.8, 1.0}});
 
     this->insertBuild({GL_TRIANGLE_STRIP, 20, 4, {0.5, 0.6, 1.0, 1.0}});
 
@@ -378,17 +379,18 @@ int main(){
     frasco.translate({0.3, -0.3, 0.0});
 
     // Vetor de poligonos que serão renderizados
-    Scene cena(program);
-    cena.insertObject(coronga);
-    cena.insertObject(humano);
-    cena.insertObject(seringa);
-    cena.insertObject(frasco);
+    Scene cena1(program);
+    Scene cena2(program);
+    cena1.insertObject(coronga);
+    cena1.insertObject(humano);
+    cena2.insertObject(seringa);
+    cena1.insertObject(frasco);
 
     // Exibindo nossa janela
     glfwShowWindow(window);
 
     // configurações de profundidade
-    glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_DEPTH_TEST);
     glEnable(GL_LESS);
 
     while (!glfwWindowShouldClose(window)){
@@ -397,9 +399,10 @@ int main(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(1.0, 1.0, 1.0, 1.0);
 
-        scene_event(window, &cena);
+        scene_event(window, &cena2);
         
-        cena.render();
+        cena1.render();
+        cena2.render();
 
         glfwSwapBuffers(window);
     }
