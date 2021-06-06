@@ -1,3 +1,10 @@
+/*
+Nomes - Numero USP
+Alex Soares Prestes - 10407962
+João Victor Dell Agli Floriano - 10799783
+Karoliny Oliveira - 10368020
+*/
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #define M_PI 3.14159265358979323846
