@@ -281,13 +281,7 @@ void scene_event(GLFWwindow *window, Scene *scene){
     }
     if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
         scene->currentObject()->translate( {-0.001, 0.00, 0.00} );
-    }/*
-    if(glfwGetKey(window, GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS){
-        scene->currentObject()->translate( { 0.00, 0.00, 0.01} );
     }
-    if(glfwGetKey(window, GLFW_KEY_KP_ADD) == GLFW_PRESS){
-        scene->currentObject()->translate( { 0.00, 0.00,-0.01} );
-    }*/
 
     // Evento das teclas de rotação
     if(glfwGetKey(window, GLFW_KEY_KP_4) == GLFW_PRESS){
@@ -295,19 +289,7 @@ void scene_event(GLFWwindow *window, Scene *scene){
     }
     if(glfwGetKey(window, GLFW_KEY_KP_6) == GLFW_PRESS){
         scene->currentObject()->rotate( { 0.00, 0.00, 0.005 } );
-    }/*
-    if(glfwGetKey(window, GLFW_KEY_KP_2) == GLFW_PRESS){
-        scene->currentObject()->rotate( {-0.005, 0.00, 0.00 } );
     }
-    if(glfwGetKey(window, GLFW_KEY_KP_8) == GLFW_PRESS){
-        scene->currentObject()->rotate( { 0.005, 0.00, 0.00 } );
-    }
-    if(glfwGetKey(window, GLFW_KEY_KP_7) == GLFW_PRESS){
-        scene->currentObject()->rotate( { 0.00, 0.005, 0.00 } );
-    }
-    if(glfwGetKey(window, GLFW_KEY_KP_9) == GLFW_PRESS){
-        scene->currentObject()->rotate( { 0.00,-0.005, 0.00 } );
-    }*/
 
     // Evento das teclas de escala
     if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
