@@ -285,10 +285,10 @@ void scene_event(GLFWwindow *window, Scene *scene){
 
     // Evento das teclas de rotação
     if(glfwGetKey(window, GLFW_KEY_KP_4) == GLFW_PRESS){
-        scene->currentObject()->rotate( { 0.00, 0.00,-0.005 } );
+        scene->currentObject()->rotate( { 0.00, 0.00, 0.005 } );
     }
     if(glfwGetKey(window, GLFW_KEY_KP_6) == GLFW_PRESS){
-        scene->currentObject()->rotate( { 0.00, 0.00, 0.005 } );
+        scene->currentObject()->rotate( { 0.00, 0.00,-0.005 } );
     }
 
     // Evento das teclas de escala
